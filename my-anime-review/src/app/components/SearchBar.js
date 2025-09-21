@@ -1,7 +1,6 @@
-// components/SearchBar.js
 "use client";
 
-import { useState ,useEffect} from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
@@ -15,8 +14,7 @@ export default function SearchBar() {
 
     try {
       const res = await axios.get(
-        `https://api.jikan.moe/v4/anime?q=${query}&limit=5`,
-
+        `https://api.jikan.moe/v4/anime?q=${query}&limit=5`
       );
 
       setResults(res.data.data || []);
@@ -25,6 +23,7 @@ export default function SearchBar() {
       setResults([]);
     }
   };
+
   useEffect(() => {
     const delayDebounce = setTimeout(() => {
       searchAnime(query);
@@ -34,60 +33,41 @@ export default function SearchBar() {
   }, [query]);
 
   return (
-    <div style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>
+    <div className="search-container">
       <input
         type="text"
         placeholder="Buscar anime..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        style={{ padding: "6px", width: "250px", marginRight: "10px" }}
       />
-       {/* Resultados */}
+
+      {/* Resultados */}
       {results.length > 0 && (
-        <div
-          style={{
-            position: "absolute",
-            background: "white",
-            border: "1px solid #ccc",
-            borderRadius: "6px",
-            marginTop: "5px",
-            width: "300px",
-            maxHeight: "250px",
-            overflowY: "auto",
-            zIndex: 10,
-          }}
-        >
+        <div className="results">
           {results.map((anime) => (
             <div
               key={anime.mal_id}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                padding: "8px",
-                cursor: "pointer",
-                borderBottom: "1px solid #eee",
-              }}
+              className="card"
               onClick={() => {
-                setQuery(""); // limpa a busca
-                setResults([]); // limpa os resultados
+                setQuery("");
+                setResults([]);
                 router.push(`/anime/${anime.mal_id}`);
               }}
             >
               <img
                 src={anime.images.jpg.image_url}
                 alt={anime.title}
-                style={{
-                  width: "40px",
-                  height: "55px",
-                  objectFit: "cover",
-                  borderRadius: "4px",
-                  marginRight: "10px",
-                }}
               />
-              <span>{anime.title}</span>
+              <div className="card-content">
+                <h3>{anime.title}</h3>
+              </div>
             </div>
           ))}
         </div>
+      )}
+
+      {results.length === 0 && query && (
+        <p className="empty">Nenhum anime encontrado 😢</p>
       )}
     </div>
   );
