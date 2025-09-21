@@ -7,21 +7,16 @@ import axios from "axios";
 export default function AnimePage() {
   const params = useParams();
   const { id } = params;
-
   const [anime, setAnime] = useState(null);
 
   useEffect(() => {
     const fetchAnime = async () => {
       try {
         const res = await axios.get(
-          `https://api.myanimelist.net/v2/anime/${id}?fields=rank,mean,alternative_titles`,
-          {
-            headers: {
-              "X-MAL-CLIENT-ID": process.env.MAL_CLIENT_ID,
-            },
-          }
-        );
-        setAnime(res.data);
+          `https://api.jikan.moe/v4/anime/${id}`,
+        )
+
+        setAnime(res.data.data);
       } catch (err) {
         console.error(err);
       }
@@ -35,21 +30,18 @@ export default function AnimePage() {
   return (
     <div>
       <h1>{anime.title}</h1>
-      {anime.main_picture && (
+      {anime.images?.jpg?.large_image_url && (
         <img
-          src={anime.main_picture.medium}
+          src={anime.images?.jpg?.large_image_url}
           alt={anime.title}
           style={{ width: "200px", borderRadius: "6px" }}
         />
       )}
-      <p>Rank: {anime.rank || "N/A"}</p>
-      <p>Média: {anime.mean || "N/A"}</p>
-      {anime.alternative_titles && (
-        <p>
-          Títulos alternativos:{" "}
-          {anime.alternative_titles.en || anime.alternative_titles.jp}
-        </p>
-      )}
+      <p><b>Rank:</b> {anime.rank || "N/A"}</p>
+      <p><b>Média:</b> {anime.score || "N/A"}</p>
+      <p><b>Títulos alternativos:</b>{" "}
+        {anime.title_english || anime.title_japanese || "N/A"}</p>
+       <p><b>Episódios:</b> {anime.episodes || "?"}</p>
     </div>
   );
 }

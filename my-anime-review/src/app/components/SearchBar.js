@@ -1,7 +1,7 @@
 // components/SearchBar.js
 "use client";
 
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 
@@ -15,19 +15,23 @@ export default function SearchBar() {
 
     try {
       const res = await axios.get(
-        `https://api.myanimelist.net/v2/anime?q=${query}&limit=5`,
-        {
-          headers: {
-            "X-MAL-CLIENT-ID": process.env.MAL_CLIENT_ID,
-          },
-        }
+        `https://api.jikan.moe/v4/anime?q=${query}&limit=5`,
+
       );
-      
+
       setResults(res.data.data || []);
     } catch (err) {
       console.error(err);
+      setResults([]);
     }
   };
+  useEffect(() => {
+    const delayDebounce = setTimeout(() => {
+      searchAnime(query);
+    }, 500);
+
+    return () => clearTimeout(delayDebounce);
+  }, [query]);
 
   return (
     <div style={{ padding: "10px", borderBottom: "1px solid #ddd" }}>
@@ -38,37 +42,53 @@ export default function SearchBar() {
         onChange={(e) => setQuery(e.target.value)}
         style={{ padding: "6px", width: "250px", marginRight: "10px" }}
       />
-      <button
-        onClick={searchAnime}
-        style={{
-          padding: "6px 10px",
-          backgroundColor: "#2563eb",
-          color: "white",
-          border: "none",
-          borderRadius: "4px",
-          cursor: "pointer",
-        }}
-      >
-        Buscar
-      </button>
-
-      <div>
-        {results.map((anime) => (
-          <div
-            key={anime.node.id}
-            style={{
-              cursor: "pointer",
-              marginTop: "5px",
-              padding: "5px",
-              border: "1px solid #eee",
-              borderRadius: "4px",
-            }}
-            onClick={() => router.push(`/anime/${anime.node.id}`)}
-          >
-            {anime.node.title}
-          </div>
-        ))}
-      </div>
+       {/* Resultados */}
+      {results.length > 0 && (
+        <div
+          style={{
+            position: "absolute",
+            background: "white",
+            border: "1px solid #ccc",
+            borderRadius: "6px",
+            marginTop: "5px",
+            width: "300px",
+            maxHeight: "250px",
+            overflowY: "auto",
+            zIndex: 10,
+          }}
+        >
+          {results.map((anime) => (
+            <div
+              key={anime.mal_id}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                padding: "8px",
+                cursor: "pointer",
+                borderBottom: "1px solid #eee",
+              }}
+              onClick={() => {
+                setQuery(""); // limpa a busca
+                setResults([]); // limpa os resultados
+                router.push(`/anime/${anime.mal_id}`);
+              }}
+            >
+              <img
+                src={anime.images.jpg.image_url}
+                alt={anime.title}
+                style={{
+                  width: "40px",
+                  height: "55px",
+                  objectFit: "cover",
+                  borderRadius: "4px",
+                  marginRight: "10px",
+                }}
+              />
+              <span>{anime.title}</span>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
