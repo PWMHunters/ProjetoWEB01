@@ -34,14 +34,23 @@ export default function SearchBar() {
 
   /* antes era search-container*/
   return (
-    <div className="search-bar">
-      <input
-        type="text"
-        placeholder="Buscar anime..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
+    <>
+  <div className="search-bar">
+    <button className="search-button">
+      <img 
+        src="/images/lupa.png" 
+        alt="Buscar" 
+        width="20" 
+        height="20" 
       />
-
+    </button>
+    <input
+      type="text"
+      placeholder="Buscar anime..."
+      value={query}
+      onChange={(e) => setQuery(e.target.value)}
+    />
+    </div>
       {/* Resultados */}
       {results.length > 0 && (
         <div className="results">
@@ -70,6 +79,6 @@ export default function SearchBar() {
       {results.length === 0 && query && (
         <p className="empty">Nenhum anime encontrado 😢</p>
       )}
-    </div>
+    </>
   );
 }
