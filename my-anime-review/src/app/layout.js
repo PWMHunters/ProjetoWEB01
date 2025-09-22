@@ -8,7 +8,7 @@ export default function RootLayout({ children }) {
       <body>
         {/* Cabeçalho */}
         <header style={{ 
-          position: "relative", 
+          position: "relative", /* o tamanho segue a logo */
           padding: "40px 10px", 
           boxShadow: "0px 2px 8px #000000ff", 
           textAlign: "center",

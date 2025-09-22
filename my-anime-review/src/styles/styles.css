@@ -87,7 +87,7 @@ body {
   border-color: #0070f3;
 }
 
-/* BOTÃO DE FAVORITOS */
+/* BOTÃO DE FAVORITOS ALINHADOS */
 .search-bar-container {
   display: flex;
   align-items: center;
@@ -97,6 +97,7 @@ body {
   max-width: 600px;
 }
 
+/* CONFIG DO BOTAO DE FAV */
 .favorites-button {
   display: flex;
   align-items: center;

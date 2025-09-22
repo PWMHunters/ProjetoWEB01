@@ -55,7 +55,7 @@ export default function SearchBar() {
       onChange={(e) => setQuery(e.target.value)}
     />
     </div>
-    <Link href="/favorites">
+    <Link href="/favorites" /* icone dos favs */>
         <button className="favorites-button">
           <img
             src="/images/flag.png"
