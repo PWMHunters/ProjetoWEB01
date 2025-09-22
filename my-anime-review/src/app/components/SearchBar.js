@@ -10,8 +10,10 @@ export default function SearchBar() {
   const router = useRouter();
 
   const searchAnime = async () => {
-    if (!query) return;
-
+    if (query.trim() === "") { /*agora verifica se esta vazio */
+    setResults([]);
+    return;
+  }
     try {
       const res = await axios.get(
         `https://api.jikan.moe/v4/anime?q=${query}&limit=5`
@@ -52,7 +54,7 @@ export default function SearchBar() {
     />
     </div>
       {/* Resultados */}
-      {results.length > 0 && (
+      {results.length > 0 && query.trim() !== "" && (
         <div className="results">
           {results.map((anime) => (
             <div

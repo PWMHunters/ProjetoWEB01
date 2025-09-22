@@ -9,22 +9,24 @@ export default function RootLayout({ children }) {
         <header style={{ 
           position: "relative", 
           padding: "30px 10px", 
-          boxShadow: "0px 4px 6px #000000ff", 
+          boxShadow: "0px 3px 8px #000000ff", 
           textAlign: "center",
-          backgroundColor: "#554e4eff",
+          backgroundColor: "#858080ff",
           borderBottomLeftRadius: "15px",
           borderBottomRightRadius: "15px",
           }}>
-          <h1 style={{ 
+          <img
+          src="/images/logo.png.png"
+          alt="Avaliador de Animes Logo"
+          style={{ 
             margin: 0, 
             position: "absolute", 
             left: "50%",
             top: "50%", 
             transform: "translate(-50%, -50%)",
-            color: "#ffffffff", 
-            }}>
-            Avaliador de Animes
-            </h1>
+            height: '70px',
+            }}
+            />
           <div style={{ textAlign: "right" }}>
             <a href="/favorites">
               <button

@@ -45,14 +45,20 @@ export default function AnimePage() {
   if (!anime) return <p>Carregando...</p>;
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ /* centralizar os animes */
+      padding: "20px",
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      textAlign: 'center'
+      }}>
       <h1>{anime.title}</h1>
 
       {anime.images?.jpg?.large_image_url && (
         <img
           src={anime.images?.jpg?.large_image_url}
           alt={anime.title}
-          style={{ width: "200px", borderRadius: "6px" }}
+          style={{ width: "200px", borderRadius: "6px", margin: '15px 0' }}
         />
       )}
 
