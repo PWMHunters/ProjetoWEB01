@@ -32,8 +32,9 @@ export default function SearchBar() {
     return () => clearTimeout(delayDebounce);
   }, [query]);
 
+  /* antes era search-container*/
   return (
-    <div className="search-container">
+    <div className="search-bar">
       <input
         type="text"
         placeholder="Buscar anime..."

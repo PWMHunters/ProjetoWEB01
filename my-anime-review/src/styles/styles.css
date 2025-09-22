@@ -7,10 +7,15 @@
 }
 
 body {
-  background-color: #f4f4f9;
+  background-color: #b1b1c7;
   color: #333;
   line-height: 1.5;
-  padding-top: 70px; /* espaço p/ navbar fixa */
+  /*padding-top: 70px; /* espaço p/ navbar fixa */
+}
+
+.home {
+  text-align: center; /* entraliza todo o texto dentro */
+  margin-top: 40px;   /* adiciona um espaço acima pra não colar na busca */
 }
 
 /* NAVBAR */
@@ -47,7 +52,7 @@ body {
 .search-bar {
   width: 100%;
   max-width: 500px;
-  margin-bottom: 30px;
+  margin: 20px auto;
 }
 
 .search-bar input {
