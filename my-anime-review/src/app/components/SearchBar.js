@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import Link from 'next/link';
 
 export default function SearchBar() {
   const [query, setQuery] = useState("");
@@ -10,8 +11,10 @@ export default function SearchBar() {
   const router = useRouter();
 
   const searchAnime = async () => {
-    if (!query) return;
-
+    if (query.trim() === "") { /*agora verifica se esta vazio */
+    setResults([]);
+    return;
+  }
     try {
       const res = await axios.get(
         `https://api.jikan.moe/v4/anime?q=${query}&limit=5`
@@ -32,17 +35,39 @@ export default function SearchBar() {
     return () => clearTimeout(delayDebounce);
   }, [query]);
 
+  /* antes era search-container*/
   return (
-    <div className="search-container">
-      <input
-        type="text"
-        placeholder="Buscar anime..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
+    <>
+  <div className="search-bar-container">
+  <div className="search-bar">
+    <button className="search-button">
+      <img 
+        src="/images/lupa.png" 
+        alt="Buscar" 
+        width="20" 
+        height="20" 
       />
-
+    </button>
+    <input
+      type="text"
+      placeholder="Buscar anime..."
+      value={query}
+      onChange={(e) => setQuery(e.target.value)}
+    />
+    </div>
+    <Link href="/favorites">
+        <button className="favorites-button">
+          <img
+            src="/images/flag.png"
+            alt="Meus Favoritos"
+            width="24"
+            height="24"
+          />
+        </button>
+      </Link>
+    </div> 
       {/* Resultados */}
-      {results.length > 0 && (
+      {results.length > 0 && query.trim() !== "" && (
         <div className="results">
           {results.map((anime) => (
             <div
@@ -69,6 +94,6 @@ export default function SearchBar() {
       {results.length === 0 && query && (
         <p className="empty">Nenhum anime encontrado 😢</p>
       )}
-    </div>
+    </>
   );
 }
