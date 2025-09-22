@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import Link from 'next/link';
 
 export default function SearchBar() {
   const [query, setQuery] = useState("");
@@ -37,6 +38,7 @@ export default function SearchBar() {
   /* antes era search-container*/
   return (
     <>
+  <div className="search-bar-container">
   <div className="search-bar">
     <button className="search-button">
       <img 
@@ -53,6 +55,17 @@ export default function SearchBar() {
       onChange={(e) => setQuery(e.target.value)}
     />
     </div>
+    <Link href="/favorites">
+        <button className="favorites-button">
+          <img
+            src="/images/flag.png"
+            alt="Meus Favoritos"
+            width="24"
+            height="24"
+          />
+        </button>
+      </Link>
+    </div> 
       {/* Resultados */}
       {results.length > 0 && query.trim() !== "" && (
         <div className="results">
