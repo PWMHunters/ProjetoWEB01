@@ -37,9 +37,22 @@ export default function ReviewForm({ anime }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ marginTop: 20, border: "1px solid #eee", padding: 12, borderRadius: 6 }}>
+    <form onSubmit={handleSubmit} 
+    style={{ 
+      marginTop: 20, 
+      border: "1px solid #eee", 
+      padding: 12, 
+      borderRadius: 6 
+      }}>
       <h3>Avaliar: {anime.title}</h3>
-      <input placeholder="Seu nome" value={username} onChange={(e)=>setUsername(e.target.value)} style={{ display: "block", width: "100%", padding: 8, marginBottom: 8 }} />
+      <input placeholder="Seu nome" value={username} onChange={(e)=>setUsername(e.target.value)} 
+      style={{ 
+        display: "block", 
+        width: "100%", 
+        padding: 8, 
+        marginBottom: 8 
+        }} 
+        />
       <label>
         Nota:
         <select
@@ -56,8 +69,21 @@ export default function ReviewForm({ anime }) {
           ))}
         </select>
       </label>
-      <textarea placeholder="Comentário" value={comment} onChange={(e)=>setComment(e.target.value)} rows="3" style={{ display: "block", width: "100%", padding: 8, marginBottom: 8 }} />
-      <button type="submit" disabled={loading} style={{ padding: "8px 12px", background: "#16a34a", color: "white", border: "none", borderRadius: 6 }}>
+      <textarea placeholder="Comentário" value={comment} onChange={(e)=>setComment(e.target.value)} rows="3" 
+      style={{ 
+      display: "block", 
+      width: "100%", 
+      padding: 8, 
+      marginBottom: 8 
+      }} />
+      <button type="submit" disabled={loading} 
+      style={{ 
+        padding: "8px 12px", 
+        background: "#16a34a", 
+        color: "white", 
+        border: "none", 
+        borderRadius: 6 
+        }}>
         {loading ? "Salvando..." : "Salvar Avaliação"}
       </button>
     </form>
