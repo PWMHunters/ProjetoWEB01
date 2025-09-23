@@ -3,7 +3,10 @@
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import axios from "axios";
-import { addFavorite } from "../../services/favorites"; 
+import { addFavorite } from "../../services/favorites";
+import ReviewForm from "../../components/ReviewForm";
+import ReviewList from "../../../app/components/ReviewList";
+
 
 export default function AnimePage() {
   const params = useParams();
@@ -51,7 +54,7 @@ export default function AnimePage() {
       flexDirection: 'column',
       alignItems: 'center',
       textAlign: 'center'
-      }}>
+    }}>
       <h1>{anime.title}</h1>
 
       {anime.images?.jpg?.large_image_url && (
@@ -85,6 +88,11 @@ export default function AnimePage() {
       >
         Adicionar aos Favoritos
       </button>
+      <ReviewForm anime={anime} />
+
+     
+      <ReviewList animeId={anime.mal_id} />
+
     </div>
   );
 }
