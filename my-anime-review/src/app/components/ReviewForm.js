@@ -59,7 +59,12 @@ export default function ReviewForm({ anime }) {
           value={score}
           onChange={(e) => setScore(e.target.value)}
           required
-          style={{ display: "block", width: "100%", padding: 8, marginBottom: 8 }}
+          style={{ 
+            display: "block", 
+            width: "100%", 
+            padding: 8, 
+            marginBottom: 8 
+          }}
         >
           <option value="">Selecione</option>
           {[...Array(11).keys()].map((n) => (

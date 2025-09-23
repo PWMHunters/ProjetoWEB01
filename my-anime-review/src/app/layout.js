@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
           padding: "40px 10px", 
           boxShadow: "0px 2px 8px #000000ff", 
           textAlign: "center",
-          backgroundColor: "#858080ff",
+          backgroundColor: "#a79d9dff",
           borderBottomLeftRadius: "15px",
           borderBottomRightRadius: "15px",
           }}>

@@ -64,7 +64,10 @@ export default function AnimePage() {
           style={{ width: "200px", borderRadius: "6px", margin: '15px 0' }}
         />
       )}
-
+      <div>
+        <title>Avaliador de Animes</title>
+      <link rel="shortcut icon" href="/images/guia.png" />
+      </div>
       <p><b>Rank:</b> {anime.rank || "N/A"}</p>
       <p><b>Média:</b> {anime.score || "N/A"}</p>
       <p>

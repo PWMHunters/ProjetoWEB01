@@ -22,6 +22,8 @@ export default function FavoritesPage() {
 
   return (
     <div className="results">
+      <title>Avaliador de Animes</title>
+      <link rel="shortcut icon" href="/images/guia.png" />
       {favorites.length === 0 && <p className="empty">Nenhum favorito ainda</p>}
       {favorites.map(fav => (
         <div key={fav.objectId} className="card">
